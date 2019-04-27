@@ -2,13 +2,17 @@ import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from smtplib import SMTP, SMTPException,SMTPAuthenticationError
+from utils.util import TemplateFormat
+from csv_File import DataManager
+
+
 
 host = "smtp.gmail.com"
 port = 587
 email  = "hungrygupta@gmail.com"
 password = "satishkumar"
 from1 = "hungrygupta@gmail.com"
-to_list = ["hungrygupta@gmail.com"]
+to_list = []
 
 
 
@@ -16,9 +20,8 @@ class MessageUser:
 	user_details = []
 	messages = []
 	email_messages = []
-	base_message = """ 
-    HI there {name} jk  {date} jj  ${total}
-	"""
+	base_message = ""
+
 	def  add_user(self, name,amount, email=None):
 		name = name[0].upper() + name[1:].lower()
 		amount = "%.2f"%(amount)
@@ -37,34 +40,29 @@ class MessageUser:
 	    return self.user_details
 
 	def make_message(self):
-		print "dd", len(self.get_details())
-		if(len(self.user_details) > 0):
-			for detail in self.get_details():
-				name = detail['name']
-				date = detail['date']
-				amount = detail['amount']
-				message = self.base_message
-				new_msg = message.format(
-				       name = name,
-				       date= date,
-				       total = amount
-				)
-				email_id = detail.get("email")
-				if email_id:
+		user_list = DataManager().read_data()
+		if(len(user_list) > 0):
+			for user in user_list:
+				name = user['name']
+				date = user['date']
+				email =  user['email']
+				new_msg  = TemplateFormat().get_final_html_template(name, date)
+				if email:
 					user_data = {
-					  "email" : email_id,
+					  "email" : email,
 					  "message" : new_msg
 					}
 					self.email_messages.append(user_data)
 				else:
-					self.messages.append(new_msg)
+					print "email is not available"
+					# self.messages.append(new_msg)
 			return self.messages
 		return []
 			
-	def send_email(self):
+	def send_email(self, Subject="Billing.."):
 		self.make_message()
-		print len(self.email_messages)
 		if len(self.email_messages) > 0:
+			# print "lll",self.email_messages
 			for detail in self.email_messages:
 				email_id = detail['email']
 				user_message = detail['message']
@@ -75,10 +73,10 @@ class MessageUser:
 					email_obj.ehlo()	
 					email_obj.login(email,password)
 					the_msg = MIMEMultipart("alternative")
-					the_msg['Subject'] = "Hello there"
+					the_msg['Subject'] =Subject
 					the_msg['From'] = from1
 					the_msg['To'] = email_id
-					part1 =  MIMEText(user_message, "plain")
+					part1 =  MIMEText(user_message, "html")
 					the_msg.attach(part1)
 					print(the_msg.as_string())
 					email_obj.sendmail(from1,[email_id],the_msg.as_string())
@@ -87,7 +85,7 @@ class MessageUser:
 			return True
 		return False		
 
-user_obj = MessageUser()
-user_obj.add_user("satish kumar",2222.222,"hungrygupta@gmail.com")
-user_obj.add_user("satish kumar gupta",333222.222,"hungrygupta@gmail.com")
-print user_obj.send_email()
+# user_obj = MessageUser()
+# user_obj.add_user("satish kumar",2222.222,"hungrygupta@gmail.com")
+# user_obj.add_user("satish kumar gupta",333222.222,"hungrygupta@gmail.com")
+# print user_obj.send_email()

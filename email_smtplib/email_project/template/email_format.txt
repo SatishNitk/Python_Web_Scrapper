@@ -1,1 +1,6 @@
-HI there {name} jk  {date} jj  ${total}
+Dear {name},
+	          I am glad to imform u that i am going to get married on {date}. so please attend the marriage ceremony and make my marriage memorable. 
+
+	Thanks & Regards,
+	{name}
+         
