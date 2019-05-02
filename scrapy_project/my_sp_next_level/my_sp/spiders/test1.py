@@ -2,7 +2,8 @@ from scrapy.spiders import CrawlSpider, Rule
 from scrapy.selector import Selector
 from scrapy.linkextractors import LinkExtractor
 from my_sp.items import MySpItem
-import time
+from scrapy.loader import ItemLoader
+
 class MySpider(CrawlSpider):
     name = "craigs"
     allowed_domains = ["sfbay.craigslist.org"]
@@ -16,17 +17,15 @@ class MySpider(CrawlSpider):
 
     def parse_items(self, response):
         hxs = Selector(response)
+        l = ItemLoader(item=MySpItem(), response=response)
         titles = hxs.xpath('//li[@class="result-row"]')
-        items = []
         index = 1
         for titles in titles:
-            item = MySpItem()
-            item["title"] = titles.xpath("p/a/text()").getall()
-            item["link"] = titles.xpath("a/@href").extract()
+            l.add_xpath("title",titles.xpath("p/a/text()").getall())
+            l.add_xpath("link",titles.xpath("a/@href").extract())
             if index%2 == 0:
-                item["name"] = "satish"
+                l.add_value("name","satish")
             else:
-                item["name"] = ""
-            index += 1   
-            items.append(item)
-        return(items)
+                l.add_value("name", "")
+            index += 1  
+        return l.load_item()    
