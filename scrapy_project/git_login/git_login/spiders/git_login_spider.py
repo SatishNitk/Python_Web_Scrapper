@@ -10,8 +10,8 @@ class GitSpider(scrapy.Spider):
     start_urls = ["https://www.github.com/login"]
 
     def parse(self, response):
-        formdata = {'login': 'satishoc',
-                'password': 'guptakumar1234' }
+        formdata = {'login': '',
+                'password': '' }
         yield FormRequest.from_response(response,
                                         formdata=formdata,
                                         clickdata={'name': 'commit'},
