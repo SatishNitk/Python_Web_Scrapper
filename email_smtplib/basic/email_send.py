@@ -2,7 +2,7 @@
 host = "smtp.gmail.com"
 port = 587
 email  = "hungrygupta@gmail.com"
-password = "satishkumar"
+password = ""
 from1 = "hungrygupta@gmail.com"
 to = ["hungrygupta@gmail.com"]
 from smtplib import SMTP, SMTPException,SMTPAuthenticationError

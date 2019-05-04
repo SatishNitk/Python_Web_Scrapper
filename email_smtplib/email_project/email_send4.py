@@ -10,7 +10,7 @@ from csv_File import DataManager
 host = "smtp.gmail.com"
 port = 587
 email  = "hungrygupta@gmail.com"
-password = "satishkumar"
+password = ""
 from1 = "hungrygupta@gmail.com"
 to_list = []
 
