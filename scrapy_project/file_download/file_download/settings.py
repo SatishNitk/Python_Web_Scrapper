@@ -20,8 +20,9 @@ NEWSPIDER_MODULE = 'file_download.spiders'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
-TEM_PIPELINES = {'scrapy.pipelines.files.FilesPipeline': 1}
+# TEM_PIPELINES = {'file_download.pipelines.FileDownloadPipeline': 1}
 FILES_STORE = '/home/satish/ime/'
+# DOWNLOAD_TIMEOUT  = 1200
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
@@ -67,7 +68,7 @@ FILES_STORE = '/home/satish/ime/'
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'scrapy.pipelines.files.FilesPipeline': 1, 
+  'file_download.pipelines.FileDownloadPipeline': 1
 }
 DOWNLOAD_TIMEOUT  = 1200
 FILES_STORE = "/home/satish/ime/"

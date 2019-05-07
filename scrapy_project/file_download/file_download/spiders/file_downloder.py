@@ -8,13 +8,13 @@ class Mp3downloader(scrapy.Spider):
 	}
 
 	def parse(self, response):
-		k = 0 
+		print("parse.........................")
 		items = FileDownloadItem()
+		items['file_urls'] = []
+
 		for link in response.xpath("//div[contains(@id,'pi')]//following-sibling::ul//li//a"):
-			url = link.xpath(".//@href").extract_first()
-			self.logger.info("item= {}".format(url))
-			items['file_urls'] = [url]  # it should be lust always...
-			if(k==1):
-				break
-			k += 1
-			yield (items)
+			print("for loop.........................")
+			items['file_urls'].append(link.xpath(".//@href").extract_first())
+			items['name'] = link.xpath(".//text()").extract_first()
+			self.logger.info(items['name'])	
+			yield items

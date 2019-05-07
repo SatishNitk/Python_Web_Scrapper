@@ -12,4 +12,4 @@ class FileDownloadItem(scrapy.Item):
     # define the fields for your item here like:
     file_urls = scrapy.Field()
     files = scrapy.Field()  #its a optional.... nothing harmful to keep .. some concept is there but let me find ..the concept
-
+    name = scrapy.Field()
