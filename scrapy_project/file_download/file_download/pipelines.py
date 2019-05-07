@@ -19,7 +19,6 @@ class FileDownloadPipeline(FilesPipeline):
             url = request
         else:
             url = request.url
-        media_guid = "saish" + str(random.randrange(20, 50, 3)) # change to request.url after deprecation
         media_ext =os.path.splitext(url)[1]  # change to request.url after deprecation
         return 'mp3_folder/%s%s' % (request.meta['filename'], media_ext)
 
