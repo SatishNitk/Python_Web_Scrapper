@@ -21,6 +21,20 @@ NEWSPIDER_MODULE = 'brickset.spiders'
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
 
+# this is for user agent  -> for multiple browser instance
+# DOWNLOADER_MIDDLEWARES = {
+#     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
+#     'scrapy_user_agents.middlewares.RandomUserAgentMiddleware': 400,
+#     'scrapy_proxy_pool.middlewares.ProxyPoolMiddleware': 610,
+#     'scrapy_proxy_pool.middlewares.BanDetectionMiddleware': 620,
+
+# }
+
+# PROXY_POOL_ENABLED = True
+
+
+
+
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
 

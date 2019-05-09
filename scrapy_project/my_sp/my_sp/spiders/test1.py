@@ -27,6 +27,6 @@ class MySpider(CrawlSpider):
                 item["name"] = "satish"
             else:
                 item["name"] = ""
-            index += 1   
+            index += 1 
             items.append(item)
         return(items)

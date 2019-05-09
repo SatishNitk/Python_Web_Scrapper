@@ -20,6 +20,7 @@ class FileDownloadPipeline(FilesPipeline):
         else:
             url = request.url
         media_ext =os.path.splitext(url)[1]  # change to request.url after deprecation
+        print("media_ext------------------",media_ext)
         return 'mp3_folder/%s%s' % (request.meta['filename'], media_ext)
 
     def get_media_requests(self, item, info):
