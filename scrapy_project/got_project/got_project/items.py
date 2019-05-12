@@ -9,5 +9,14 @@ import scrapy
 
 
 class GotProjectItem(scrapy.Item):
-	name  = scrapy.Field()
-	image_urls = scrapy.Field()   # it contains only list check to spider
+	# name  = scrapy.Field()
+	image_urls = scrapy.Field()   # it contains only list check to 
+	Death =scrapy.Field()
+	Allegiance = scrapy.Field()
+	When = scrapy.Field()
+	Where = scrapy.Field()
+	Killer = scrapy.Field()
+	Method = scrapy.Field()
+	Method_category = scrapy.Field()
+	Reason = scrapy.Field()
+	
