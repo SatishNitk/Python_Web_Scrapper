@@ -22,6 +22,8 @@ NEWSPIDER_MODULE = 'brickset.spiders'
 ROBOTSTXT_OBEY = True
 
 # this is for user agent  -> for multiple browser instance
+
+                                               #USER AGENT  
 # DOWNLOADER_MIDDLEWARES = {
 #     'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
 #     'scrapy_user_agents.middlewares.RandomUserAgentMiddleware': 400,
